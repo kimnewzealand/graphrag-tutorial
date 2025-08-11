@@ -37,7 +37,7 @@ This project uses Augment code as the code assistant.
 ## Output
 
 ```
-(.venv) PS C:\Users\ddobs\Documents\graphrag-tutorial> python .\src\graph.py
+> python .\src\graph.py
 Checking Neo4j connection to neo4j+s://e40a0a8b.databases.neo4j.io...
 ✅ Neo4j connection successful
 ✅ Initialized Anthropic Extraction LLM
