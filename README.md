@@ -40,38 +40,32 @@ This project uses Augment code as the code assistant.
 > python .\src\graph.py
 Checking Neo4j connection to neo4j+s://e40a0a8b.databases.neo4j.io...
 ✅ Neo4j connection successful
-✅ Initialized Anthropic Extraction LLM
-✅ Initialized SentenceTransformer embeddings LLM
+✅ Initialized Anthropic Extraction LLM claude-3-5-sonnet-20241022
+✅ Initialized SentenceTransformer embeddings LLM sentence-transformers/all-MiniLM-L6-v2
 ✅ Vector index text_embeddings already exists
 ✅ Initialized VectorRetriever
-✅ Initialized GraphRAG
-✅ Found PDF file in data/sample_IT_compliance_document.pdf
-✅ Loaded and split PDF file from data/sample_IT_compliance_document.pdf
-✅ Embeddings created
-✅ Knowledge graph built manually
-🔄 Creating embeddings manually
-✅ Created and stored 4 embeddings in Neo4j chunks
-✅ Created vector index for embeddings
-✅ Initialized vector retriever
-✅ GraphRAG system ready for queries
-📊 Found 48 chunks in database
-📊 Found 48 chunks with embeddings
-📄 Sample chunk: IT Compliance Agreement for using AI
-1. Data Classification Policy
-1.1 Company data is classified in...
-✅ Test query results: Based on the provided context, there are two main topics in this IT Compliance Agreement for using AI:
+✅ Loaded PDF file from data/sample_IT_compliance_document.pdf
+✅ Split PDF into 2 chunks
+✅ Stored chunks and entities
+✅ Created and stored 2 embeddings
+
+** Query: ** What are the main topics in this document?
+📊 Found 50 chunks, 50 with embeddings
+** Answer: ** Based on the provided context, there are two main topics in this IT Compliance Agreement for using AI:
 
 1. Data Classification Policy - This section outlines how company data should be classified and handled, including:
    - Three classification levels (Public, Internal, and Confidential)
    - Rules for each classification level
    - Timeline requirements for classifying new data
 
-2. LLM Usage Compliance - This section covers the rules for using Large Language Models, specifically:  
-   - Approval requirements from the IT Security team
+2. LLM Usage Compliance - This section covers the requirements for using Large Language Models, specifically:     
+   - Approval process by the IT Security team
    - Timeline for approval requests (48 hours)
 
 The document appears to be focused on establishing guidelines for both data handling and AI/LLM usage within the company.
+
 ** Query: ** How many levels is Company data classified?
+📊 Found 50 chunks, 50 with embeddings
 ** Answer: ** According to the Data Classification Policy (section 1.1), Company data is classified into three levels: Public, Internal, and Confidential.
 ✅ Neo4j driver closed
 ```
