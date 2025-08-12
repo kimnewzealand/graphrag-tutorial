@@ -1,10 +1,8 @@
 import asyncio
 import json
-from typing import Dict, List, Optional, Any, Tuple, Callable
+from typing import Dict, List,Any, Tuple, Callable
 from dataclasses import dataclass, field
 from enum import Enum
-from datetime import datetime
-from functools import partial, reduce
 from itertools import chain
 
 # Import existing functions from graph.py
@@ -15,8 +13,6 @@ from graph import (
 )
 
 from neo4j_graphrag.llm import AnthropicLLM as LLM
-from neo4j_graphrag.embeddings import SentenceTransformerEmbeddings as Embeddings
-from neo4j_graphrag.retrievers import VectorRetriever
 from neo4j_graphrag.generation.graphrag import GraphRAG
 
 class QueryType(Enum):
@@ -315,7 +311,6 @@ def create_agentic_pipeline(config: GraphRAGConfig) -> Callable[[str], AgenticRe
     retriever = create_retriever(driver, config.index_name, embedder)
     rag = GraphRAG(llm=llm, retriever=retriever)
     
-    # Create functional components
     query_analyzer = create_query_analyzer(llm)
     vector_searcher = create_vector_searcher(rag, driver)
     graph_traverser = create_graph_traverser(driver, llm)
@@ -368,7 +363,7 @@ def create_agentic_pipeline(config: GraphRAGConfig) -> Callable[[str], AgenticRe
     
     return process_query
 
-class FunctionalAgenticGraphRAG:
+class AgenticGraphRAG:
     """Agentic GraphRAG built on existing graph.py functions"""
     
     def __init__(self, config: GraphRAGConfig):
@@ -385,7 +380,7 @@ class FunctionalAgenticGraphRAG:
         
         return response.answer
     
-    async def setup_knowledge_base(self):
+    async def setup_knowledge_base(self, driver=None, llm=None):
         """Setup knowledge base using existing functions"""
         print("📚 Setting up knowledge base...")
         
@@ -394,24 +389,31 @@ class FunctionalAgenticGraphRAG:
         embedder = create_embedder()
         embedded_chunks = await create_embeddings(embedder, split_result)
         
-        # Use existing storage functions
-        driver = create_neo4j_driver(self.config)
-        llm = create_llm(self.config.anthropic_api_key)
+        # Use passed instances or create new ones
+        if driver is None:
+            driver = create_neo4j_driver(self.config)
+            should_close_driver = True
+        else:
+            should_close_driver = False
+        
+        if llm is None:
+            llm = create_llm(self.config.anthropic_api_key)
         
         store_chunks_and_entities(driver, embedded_chunks, llm, self.config.pdf_file_path)
         store_embeddings(driver, embedded_chunks, embedder)
         
-        driver.close()
+        if should_close_driver:
+            driver.close()
         print("✅ Knowledge base setup complete")
 
-async def demo_functional_agentic_with_existing():
+async def demo_agentic_graphrag():
     """Demo using existing graph.py infrastructure"""
     
     # Use existing configuration
     config = GraphRAGConfig.from_env()
     
     # Create functional agentic system
-    agentic_rag = FunctionalAgenticGraphRAG(config)
+    agentic_rag = AgenticGraphRAG(config)
     
     # Setup knowledge base using existing functions
     await agentic_rag.setup_knowledge_base()
@@ -431,4 +433,5 @@ async def demo_functional_agentic_with_existing():
         print(f"Answer: {answer}")
 
 if __name__ == "__main__":
-    asyncio.run(demo_functional_agentic_with_existing())
+    asyncio.run(demo_agentic_graphrag())
+

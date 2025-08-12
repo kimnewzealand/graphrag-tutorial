@@ -5,30 +5,28 @@ Create a dummy PDF document for RAG testing
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
+from pathlib import Path
+import PyPDF2
+from typing import List
 
-def create_sample_pdf():
-    """Create a dummy PDF with IT compliance agreement content including LLM usage and timelines"""
-    
-    # Define filename
-    filename = "sample_IT_compliance_document.pdf"
-    
-    # Ensure directory exists
-    import os
-    os.makedirs("data", exist_ok=True)
-    
-    # Create PDF
+def validate_pdf(file_path: Path) -> bool:
+    """Validate that the created PDF is readable."""
     try:
-        c = canvas.Canvas(f"data/{filename}", pagesize=letter)
+        with open(file_path, 'rb') as file:
+            pdf_reader = PyPDF2.PdfReader(file)
+            # Try to read the first page
+            if len(pdf_reader.pages) > 0:
+                first_page = pdf_reader.pages[0]
+                text = first_page.extract_text()
+                return len(text.strip()) > 0
+        return False
     except Exception as e:
-        print(f"Error creating PDF: {e}")
-        return
-    width, height = letter
-    
-    # Title
-    c.setFont("Helvetica-Bold", 16)
-    c.drawString(1*inch, 10*inch, "IT Compliance Agreement for using AI")
-    
-    content = [
+        print(f"❌ PDF validation failed: {e}")
+        return False
+
+def get_content_data() -> List[str]:
+    """Return the content data as a separate function for better separation of concerns."""
+    return [
         "1. Data Classification Policy",
         "1.1 Company data is classified into three levels: Public, Internal, and Confidential.",
         "1.2 Public data can be shared externally.",
@@ -60,41 +58,72 @@ def create_sample_pdf():
         "5.3 Annual training is required for all employees on security policies and procedures by December 31st each year.",
         "5.4 Compliance reports are due quarterly by the 15th of each quarter."
     ]
+
+def create_sample_pdf(output_dir: str = "data", filename: str = "sample_IT_compliance_document.pdf") -> None:
+    """Create a dummy PDF with IT compliance agreement content including LLM usage and timelines"""
     
-    # Add content to PDF
-    y_position = 9*inch
-    c.setFont("Helvetica", 12)
+    # Define filename and paths
+    output_path = Path(output_dir)
+    output_path.mkdir(exist_ok=True)
+    file_path = output_path / filename
     
-    for i, text in enumerate(content):
-        if i % 2 == 0:  # Section headers
-            c.setFont("Helvetica-Bold", 14)
-            c.drawString(1*inch, y_position, text)
-            y_position -= 0.3*inch
-        else:  # Section content
-            c.setFont("Helvetica", 12)
-            # Split long text into lines
-            words = text.split()
-            lines = []
-            current_line = ""
-            
-            for word in words:
-                if len(current_line + " " + word) < 70:
-                    current_line += " " + word if current_line else word
-                else:
+    content = get_content_data()
+    
+    # Create PDF
+    try:
+        c = canvas.Canvas(str(file_path), pagesize=letter)
+        
+        # Title
+        c.setFont("Helvetica-Bold", 16)
+        c.drawString(1*inch, 10*inch, "IT Compliance Agreement for using AI")
+        
+        # Add content to PDF
+        y_position = 9*inch
+        c.setFont("Helvetica", 12)
+        
+        for i, text in enumerate(content):
+            if i % 2 == 0:  # Section headers
+                c.setFont("Helvetica-Bold", 14)
+                c.drawString(1*inch, y_position, text)
+                y_position -= 0.3*inch
+            else:  # Section content
+                c.setFont("Helvetica", 12)
+                # Split long text into lines
+                words = text.split()
+                lines = []
+                current_line = ""
+                
+                for word in words:
+                    if len(current_line + " " + word) < 70:
+                        current_line += " " + word if current_line else word
+                    else:
+                        lines.append(current_line)
+                        current_line = word
+                
+                if current_line:
                     lines.append(current_line)
-                    current_line = word
+                
+                for line in lines:
+                    c.drawString(1*inch, y_position, line)
+                    y_position -= 0.2*inch
+                
+                y_position -= 0.3*inch
+        
+        # Ensure PDF is properly saved and closed
+        c.save()
+        
+        # Validate the created PDF
+        if validate_pdf(file_path):
+            print(f"✅ Created and validated {filename}")
+        else:
+            raise ValueError(f"Created PDF failed validation: {file_path}")
             
-            if current_line:
-                lines.append(current_line)
-            
-            for line in lines:
-                c.drawString(1*inch, y_position, line)
-                y_position -= 0.2*inch
-            
-            y_position -= 0.3*inch
-    
-    c.save()
-    print(f"✅ Created {filename}")
+    except Exception as e:
+        print(f"❌ Error creating PDF: {e}")
+        # Clean up any partially created file
+        if file_path.exists():
+            file_path.unlink()
+        raise
 
 if __name__ == "__main__":
     create_sample_pdf() 
