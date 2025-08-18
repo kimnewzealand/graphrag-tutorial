@@ -1,0 +1,170 @@
+{
+  "total_queries": 8,
+  "avg_retrieval_precision": 1.0,
+  "avg_retrieval_recall": 1.0,
+  "avg_generation_accuracy": 0.8077991452991453,
+  "avg_response_time": 3.3250163197517395,
+  "results": [
+    {
+      "query": "How many levels is Company data classified?",
+      "generated_answer": "According to the Data Classification Policy (section 1.1), Company data is classified into three levels: Public, Internal, and Confidential.",
+      "expected_answer": "According to the Data Classification Policy (section 1.1), Company data is classified into three levels: Public, Internal, and Confidential",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "chunks_retrieved": 1,
+        "relevant_chunks": 1
+      },
+      "generation_metrics": {
+        "factual_accuracy": 0.9444444444444444,
+        "completeness": 1.0,
+        "coherence": 1.0,
+        "groundedness": 0.8
+      },
+      "response_time": 1.6451547145843506,
+      "timestamp": "2025-08-18 16:03:37.216867"
+    },
+    {
+      "query": "What are the approval requirements for using Large Language Models?",
+      "generated_answer": "According to the IT Compliance Agreement, all Large Language Model (LLM) usage must be approved by the IT Security team within 48 hours of request. This is specified in section 2.1 of the LLM Usage Compliance policy.",
+      "expected_answer": "According to the IT Compliance Agreement, all Large Language Model (LLM) usage must be approved by the IT Security team within 48 hours of request. This is specified in section 2.1 of the LLM Usage Compliance policy.",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "chunks_retrieved": 1,
+        "relevant_chunks": 1
+      },
+      "generation_metrics": {
+        "factual_accuracy": 1.0,
+        "completeness": 1.0,
+        "coherence": 1.0,
+        "groundedness": 0.8
+      },
+      "response_time": 2.308068037033081,
+      "timestamp": "2025-08-18 16:03:39.525350"
+    },
+    {
+      "query": "What is the purpose of the Data Classification Policy?",
+      "generated_answer": "Based on the context provided, the Data Classification Policy establishes a system for categorizing company data into three distinct levels: Public, Internal, and Confidential. The purpose of this policy is to:\n\n1. Define how different types of data should be handled within the company\n2. Establish clear guidelines for data sharing and security requirements\n3. Specify how each level of data should be treated:\n   - Public data can be shared externally\n   - Internal data must remain within the company\n   - Confidential data requires special handling and encryption\n\nThe policy also mandates that all new data must be classified within 24 hours of creation, ensuring proper data management and security from the outset. This classification system helps protect company information by ensuring appropriate handling and security measures are applied based on the sensitivity level of the data.",
+      "expected_answer": "The Data Classification Policy establishes guidelines for categorizing and protecting company data based on sensitivity levels",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "chunks_retrieved": 1,
+        "relevant_chunks": 1
+      },
+      "generation_metrics": {
+        "factual_accuracy": 0.8666666666666667,
+        "completeness": 1.0,
+        "coherence": 1.0,
+        "groundedness": 0.8
+      },
+      "response_time": 4.131307125091553,
+      "timestamp": "2025-08-18 16:03:43.656837"
+    },
+    {
+      "query": "Who is responsible for IT security compliance?",
+      "generated_answer": "The provided context does not explicitly state who is responsible for IT security compliance. While the context mentions various compliance requirements like regular audits, addressing non-compliance issues, annual training requirements, and quarterly compliance reports, it does not specify which individual or department is responsible for overseeing these activities. To accurately answer who is responsible for IT security compliance, we would need additional context from other sections of the document.",
+      "expected_answer": "The IT Security team is responsible for compliance oversight and approval processes",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "chunks_retrieved": 1,
+        "relevant_chunks": 1
+      },
+      "generation_metrics": {
+        "factual_accuracy": 0.6666666666666666,
+        "completeness": 1.0,
+        "coherence": 1.0,
+        "groundedness": 0.8
+      },
+      "response_time": 2.644294261932373,
+      "timestamp": "2025-08-18 16:03:46.301707"
+    },
+    {
+      "query": "What happens if someone violates the LLM usage policy?",
+      "generated_answer": "Based on the provided context, I cannot definitively answer what happens if someone violates the LLM usage policy. While the document shows that LLM usage must be approved by the IT Security team within 48 hours of request (section 2.1), it does not specify the consequences of policy violations. The document appears to be cut off at section 2.2 (\"Employees\"), so any information about violations and consequences may be in the following sections that are not shown in the context.",
+      "expected_answer": "Policy violations may result in disciplinary action and security review",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "chunks_retrieved": 1,
+        "relevant_chunks": 1
+      },
+      "generation_metrics": {
+        "factual_accuracy": 0.6,
+        "completeness": 1.0,
+        "coherence": 1.0,
+        "groundedness": 0.8
+      },
+      "response_time": 4.532048463821411,
+      "timestamp": "2025-08-18 16:03:50.834436"
+    },
+    {
+      "query": "How should confidential data be handled?",
+      "generated_answer": "According to the IT Compliance Agreement, confidential data requires special handling and encryption (section 1.4). This is one of the three data classification levels outlined in the policy, and it has the strictest handling requirements compared to Public and Internal data.",
+      "expected_answer": "According to the IT Compliance Agreement, confidential data requires special handling and encryption (section 1.4).",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "chunks_retrieved": 1,
+        "relevant_chunks": 1
+      },
+      "generation_metrics": {
+        "factual_accuracy": 1.0,
+        "completeness": 1.0,
+        "coherence": 1.0,
+        "groundedness": 0.8
+      },
+      "response_time": 2.8234171867370605,
+      "timestamp": "2025-08-18 16:03:53.658097"
+    },
+    {
+      "query": "What is the relationship between data classification and LLM usage?",
+      "generated_answer": "Based on the provided context, while both data classification and LLM usage are covered in the IT Compliance Agreement for using AI, there isn't an explicitly stated direct relationship between them. However, they are both governed by specific compliance requirements:\n\n1. Data Classification:\n- Data is classified into three levels: Public, Internal, and Confidential\n- Each level has specific handling requirements\n- New data must be classified within 24 hours of creation\n\n2. LLM Usage:\n- Requires IT Security team approval within 48 hours of request\n\nWhile not directly stated, it's reasonable to infer that LLM usage would need to follow the data classification policies when processing different types of company data, especially considering the sensitivity levels and handling requirements for different data classifications.\n\nThe document appears to treat these as separate but important compliance areas within the overall AI usage framework.",
+      "expected_answer": "Based on the provided context, while both data classification and LLM usage are covered in the IT Compliance Agreement for using AI, there isn't an explicitly stated direct relationship between them.",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "chunks_retrieved": 1,
+        "relevant_chunks": 1
+      },
+      "generation_metrics": {
+        "factual_accuracy": 1.0,
+        "completeness": 1.0,
+        "coherence": 1.0,
+        "groundedness": 0.8
+      },
+      "response_time": 4.652043342590332,
+      "timestamp": "2025-08-18 16:03:58.310318"
+    },
+    {
+      "query": "Are there any exceptions to the approval process?",
+      "generated_answer": "Based on the provided context, there don't appear to be any explicit exceptions mentioned to the approval processes. The document states clear requirements:\n\n1. AI tools require explicit approval within 72 hours before processing customer or business data\n2. All AI usage must be documented within 24 hours of use\n3. Access requests must be approved within 3 business days\n4. Access is granted based on job role and follows the principle of least privilege\n\nThe only automatic action mentioned is the immediate revocation of access for terminated employees, but this is a security measure rather than an exception to the approval process. All other actions appear to require proper approval and documentation within the specified timeframes.",
+      "expected_answer": "All LLM usage requires approval from IT Security team with no standard exceptions",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "chunks_retrieved": 1,
+        "relevant_chunks": 1
+      },
+      "generation_metrics": {
+        "factual_accuracy": 0.38461538461538464,
+        "completeness": 1.0,
+        "coherence": 1.0,
+        "groundedness": 0.8
+      },
+      "response_time": 3.863797426223755,
+      "timestamp": "2025-08-18 16:04:02.174335"
+    }
+  ],
+  "evaluation_date": "2025-08-18 16:04:02.174439"
+}

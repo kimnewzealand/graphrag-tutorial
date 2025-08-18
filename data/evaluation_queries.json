@@ -1,13 +1,13 @@
 [
   {
     "query": "How many levels is Company data classified?",
-    "expected_answer": "Company data is classified into three levels: Public, Internal, and Confidential",
+    "expected_answer": "According to the Data Classification Policy (section 1.1), Company data is classified into three levels: Public, Internal, and Confidential",
     "category": "factual",
     "difficulty": "easy"
   },
   {
     "query": "What are the approval requirements for using Large Language Models?",
-    "expected_answer": "LLM usage requires approval from the IT Security team",
+    "expected_answer": "According to the IT Compliance Agreement, all Large Language Model (LLM) usage must be approved by the IT Security team within 48 hours of request. This is specified in section 2.1 of the LLM Usage Compliance policy.",
     "category": "compliance",
     "difficulty": "medium"
   },
@@ -31,13 +31,13 @@
   },
   {
     "query": "How should confidential data be handled?",
-    "expected_answer": "Confidential data requires the highest level of protection and restricted access",
+    "expected_answer": "According to the IT Compliance Agreement, confidential data requires special handling and encryption (section 1.4).",
     "category": "data_handling",
     "difficulty": "medium"
   },
   {
     "query": "What is the relationship between data classification and LLM usage?",
-    "expected_answer": "Data classification levels determine what data can be used with LLMs and require appropriate approval",
+    "expected_answer": "Based on the provided context, while both data classification and LLM usage are covered in the IT Compliance Agreement for using AI, there isn't an explicitly stated direct relationship between them.",
     "category": "relational",
     "difficulty": "hard"
   },
