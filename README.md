@@ -273,9 +273,10 @@ This comparison shows a layered approach to approval processes, with stricter re
 
 ```
 graphrag-tutorial/
-├── data/                     # Your source documents (PDF/TXT files)
+├── data/                     # Your source documents (PDF/TXT files) and evalation queries and results
 ├── src/                      # Python source code
 │   ├── agentic_graphrag.py   # Agentic GraphRAG System using existing functions from graph.py
+│   ├── evaluation.py          # Evaluation framework
 │   ├── graph.py          # Create knowledge graph from PDF
 │   └── create_sample_pdf.py # Create sample PDF for testing
 ├── models/                   # Local HuggingFace model cache
