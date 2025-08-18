@@ -18,6 +18,17 @@ from neo4j_graphrag.experimental.components.text_splitters.fixed_size_splitter i
 from neo4j_graphrag.retrievers import VectorRetriever
 from neo4j_graphrag.generation.graphrag import GraphRAG
 
+# Import evaluation module
+try:
+    from evaluation import (
+        load_evaluation_dataset, run_evaluation_suite,
+        save_evaluation_results, EvaluationQuery
+    )
+    EVALUATION_AVAILABLE = True
+except ImportError:
+    EVALUATION_AVAILABLE = False
+    print("⚠️ Evaluation module not available")
+
 # Pydantic Models for Enhanced Data Validation
 
 class GraphRAGConfig(BaseModel):
@@ -567,5 +578,75 @@ async def main():
         except Exception as e:
             print(f"⚠️ Warning: Error closing driver: {e}")
 
+async def run_evaluation_mode():
+    """Run the system in evaluation mode"""
+    if not EVALUATION_AVAILABLE:
+        print("❌ Evaluation module not available. Please check evaluation.py")
+        return
+
+    try:
+        # Create and validate configuration
+        config = GraphRAGConfig.from_env()
+        print("✅ Configuration validated for evaluation")
+
+        # Create components
+        driver = create_neo4j_driver(config)
+        llm = create_llm(config.anthropic_api_key)
+        embedder = create_embedder()
+        create_vector_index(driver, config.index_name)
+        retriever = create_retriever(driver, config.index_name, embedder)
+
+        # Create GraphRAG instance
+        rag = GraphRAG(llm=llm, retriever=retriever)
+        print("✅ GraphRAG system ready for evaluation")
+
+        # Load evaluation dataset
+        eval_dataset_path = Path("data/evaluation_queries.json")
+        if not eval_dataset_path.exists():
+            print(f"❌ Evaluation dataset not found at {eval_dataset_path}")
+            return
+
+        queries = load_evaluation_dataset(eval_dataset_path)
+        if not queries:
+            print("❌ No evaluation queries loaded")
+            return
+
+        # Run evaluation
+        print(f"🔄 Starting evaluation with {len(queries)} queries...")
+        suite = await run_evaluation_suite(rag, queries)
+
+        # Save results
+        results_path = Path(f"data/evaluation_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json")
+        save_evaluation_results(suite, results_path)
+
+        # Print summary
+        print("\n" + "="*50)
+        print("📊 EVALUATION SUMMARY")
+        print("="*50)
+        print(f"Total Queries: {suite.total_queries}")
+        print(f"Avg Retrieval Precision: {suite.avg_retrieval_precision:.3f}")
+        print(f"Avg Retrieval Recall: {suite.avg_retrieval_recall:.3f}")
+        print(f"Avg Generation Accuracy: {suite.avg_generation_accuracy:.3f}")
+        print(f"Avg Response Time: {suite.avg_response_time:.3f}s")
+        print("="*50)
+
+    except Exception as e:
+        print(f"❌ Error in evaluation mode: {e}")
+    finally:
+        try:
+            if 'driver' in locals() and driver:
+                driver.close()
+                print("✅ Neo4j driver closed")
+        except Exception as e:
+            print(f"⚠️ Warning: Error closing driver: {e}")
+
 if __name__ == "__main__":
-    asyncio.run(main())
+    import sys
+
+    # Check for evaluation mode
+    if len(sys.argv) > 1 and sys.argv[1] == "--eval":
+        print("🔬 Running in evaluation mode...")
+        asyncio.run(run_evaluation_mode())
+    else:
+        print("🚀 Running in normal mode...")
+        asyncio.run(main())

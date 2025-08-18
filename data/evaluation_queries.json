@@ -1,0 +1,50 @@
+[
+  {
+    "query": "How many levels is Company data classified?",
+    "expected_answer": "Company data is classified into three levels: Public, Internal, and Confidential",
+    "category": "factual",
+    "difficulty": "easy"
+  },
+  {
+    "query": "What are the approval requirements for using Large Language Models?",
+    "expected_answer": "LLM usage requires approval from the IT Security team",
+    "category": "compliance",
+    "difficulty": "medium"
+  },
+  {
+    "query": "What is the purpose of the Data Classification Policy?",
+    "expected_answer": "The Data Classification Policy establishes guidelines for categorizing and protecting company data based on sensitivity levels",
+    "category": "policy",
+    "difficulty": "medium"
+  },
+  {
+    "query": "Who is responsible for IT security compliance?",
+    "expected_answer": "The IT Security team is responsible for compliance oversight and approval processes",
+    "category": "responsibility",
+    "difficulty": "easy"
+  },
+  {
+    "query": "What happens if someone violates the LLM usage policy?",
+    "expected_answer": "Policy violations may result in disciplinary action and security review",
+    "category": "consequences",
+    "difficulty": "hard"
+  },
+  {
+    "query": "How should confidential data be handled?",
+    "expected_answer": "Confidential data requires the highest level of protection and restricted access",
+    "category": "data_handling",
+    "difficulty": "medium"
+  },
+  {
+    "query": "What is the relationship between data classification and LLM usage?",
+    "expected_answer": "Data classification levels determine what data can be used with LLMs and require appropriate approval",
+    "category": "relational",
+    "difficulty": "hard"
+  },
+  {
+    "query": "Are there any exceptions to the approval process?",
+    "expected_answer": "All LLM usage requires approval from IT Security team with no standard exceptions",
+    "category": "exceptions",
+    "difficulty": "medium"
+  }
+]
