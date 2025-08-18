@@ -41,14 +41,17 @@ This project uses Augment code as the code assistant.
 
 ```
 > python .\src\graph.py
+✅ Configuration validated successfully
+✅ Processing configuration validated
 Checking Neo4j connection to neo4j+s://e40a0a8b.databases.neo4j.io...
 ✅ Neo4j connection successful
 ✅ Initialized Anthropic Extraction LLM claude-3-5-sonnet-20241022
 ✅ Initialized SentenceTransformer embeddings LLM sentence-transformers/all-MiniLM-L6-v2
 ✅ Vector index text_embeddings already exists
 ✅ Initialized VectorRetriever
-✅ Loaded PDF file from data/sample_IT_compliance_document.pdf
+✅ Loaded PDF file from data\sample_IT_compliance_document.pdf
 ✅ Split PDF into 2 chunks
+✅ Validated 2 chunks
 ✅ Stored chunks and entities
 ✅ Created and stored 2 embeddings
 
@@ -61,15 +64,15 @@ Checking Neo4j connection to neo4j+s://e40a0a8b.databases.neo4j.io...
    - Rules for each classification level
    - Timeline requirements for classifying new data
 
-2. LLM Usage Compliance - This section covers the requirements for using Large Language Models, specifically:     
-   - Approval process by the IT Security team
+2. LLM Usage Compliance - This section covers the rules for using Large Language Models, specifically:    
+   - Approval requirements from the IT Security team
    - Timeline for approval requests (48 hours)
 
 The document appears to be focused on establishing guidelines for both data handling and AI/LLM usage within the company.
 
 ** Query: ** How many levels is Company data classified?
 📊 Found 50 chunks, 50 with embeddings
-** Answer: ** According to the Data Classification Policy (section 1.1), Company data is classified into three levels: Public, Internal, and Confidential.
+** Answer: ** According to the Data Classification Policy (section 1.1) in the IT Compliance Agreement, Company data is classified into three levels: Public, Internal, and Confidential.
 ✅ Neo4j driver closed
 ```
 

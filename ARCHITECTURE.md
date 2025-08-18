@@ -114,7 +114,7 @@
 - ✅ **Enterprise LLM**: Powered by Anthropic Claude 3.5 Sonnet for high-quality reasoning
 - ✅ **Automated KG Construction**: Neo4j GraphRAG pipeline automatically builds knowledge graphs from PDFs
 - ✅ **Manual Embedding Control**: Custom embedding generation ensures reliable vector search
-- ✅ **Production Ready**: Enterprise-grade components with robust error handling
+- ✅ **Pydantic Data Validation**: Robust data validation, early error detection, and type safety with Pydantic V2 models
 
 
 ## Performance Characteristics
